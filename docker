@@ -1,0 +1,1 @@
+docker run --rm --privileged -v /:/pwn -it cyclic3/pwn
